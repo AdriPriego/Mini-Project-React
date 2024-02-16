@@ -5,9 +5,9 @@ import { Link } from 'react-router-dom'
 function NotFound() {
   return (
     <div>
-        <h1>aaaaaaa</h1>
+        <h1>Oh oh! Parece que te has perdido</h1>
         <Link to={"/"}>
-          <button>volver a inicio</button>
+          <button>pincha aquí para volver al inicio</button>
         </Link>
     </div>
   )

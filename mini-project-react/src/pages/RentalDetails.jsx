@@ -1,21 +1,22 @@
 import React from 'react'
-import rentalData from "../data/rentals.json";
-import { useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom'
 
-function RentalDetails() {
+function RentalDetails(props) {
     const paramRental = useParams()
     console.log(paramRental)
 
-    const currentRental = rentalData.results.filter((eachObj) => {
-        if (eachObj.id == paramRental.rentalId) {
+    const filterRental = props.currentRental.filter((eachRental) => {
+        if (eachRental.id == paramRental.rentalId) {
             return true;
         } else {
             return false
         }
     })
-    console.log(currentRental)
+    console.log(filterRental)
 
-    const foundRental = currentRental[0]
+    const foundRental = filterRental[0]
+
+    console.log(foundRental)
 
   return (
     <div className='currentRental'>

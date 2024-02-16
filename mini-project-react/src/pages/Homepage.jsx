@@ -1,15 +1,17 @@
-import Footer from '../components/Footer'
-import Navbar from '../components/Navbar'
+
 import React from 'react'
-import Sidebar from '../components/Sidebar'
+
 import Rentals from '../components/Rentals'
-import { Route, Routes } from 'react-router-dom'
 
 
-function Homepage() {
+
+function Homepage(props) {
   return (
     <div>
-        <Rentals />
+        <Rentals 
+        currentRental={props.currentRental}
+        setCurrentRental={props.setCurrentRental}
+        />
         
     </div>
   )
