@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useParams } from 'react-router-dom'
+import ActualizarRental from '../components/ActualizarRental'
 
 function RentalDetails(props) {
     const paramRental = useParams()
@@ -17,6 +18,12 @@ function RentalDetails(props) {
     const foundRental = filterRental[0]
 
     console.log(foundRental)
+    
+    const [isUpdateFormShowing, setIsUpdateFormShowing] = useState(false)
+
+    const handleToggleUpdateForm = () => {
+        setIsUpdateFormShowing(!isUpdateFormShowing)
+    }
 
   return (
     <div className='currentRental'>
@@ -33,6 +40,13 @@ function RentalDetails(props) {
             <h3>Baños: {foundRental.bathrooms}</h3>
             <h3>Capacidad: {foundRental.accommodates} personas</h3>
             <p id='price'>{foundRental.price}<span id='symbol'>€</span> </p>
+            <button onClick={handleToggleUpdateForm}>Editar Información</button>
+            {isUpdateFormShowing === true ? 
+            <ActualizarRental 
+            eachObj={props.currentRental} 
+            setCurrentRental={props.setCurrentRental}
+            /> : null
+            }
         </div>
         <div className='descripciones'>
             <p>{foundRental.description}</p>

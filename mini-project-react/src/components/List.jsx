@@ -33,7 +33,7 @@ function List(props) {
               />
             </Link>
             <button onClick={() => props.handleRemoveRental(index)}>❌</button>
-
+            
             <hr />
           </div>
         );
