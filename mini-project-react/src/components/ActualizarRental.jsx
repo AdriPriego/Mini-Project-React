@@ -1,4 +1,6 @@
 import { useState } from "react";
+//estilos
+import Button from 'react-bootstrap/Button';
 
 function ActualizarRental(props) {
 
@@ -190,7 +192,7 @@ function ActualizarRental(props) {
           />
         </div>
 
-        <button>Añadir</button>
+        <Button variant="outline-success">Confirmar</Button>
       </form>
     </div>
   )

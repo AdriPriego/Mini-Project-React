@@ -10,6 +10,7 @@ import About from './pages/About'
 import { useState } from 'react'
 import rentalData from "./data/rentals.json";
 import FormAdd from './pages/FormAdd'
+import 'bootstrap/dist/css/bootstrap.min.css';
 // importa el JSON y usarlo para ver la info SOLO se hace aqui una vez
 
 let rentalDataArr = rentalData.results

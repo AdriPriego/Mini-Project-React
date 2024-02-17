@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import ActualizarRental from '../components/ActualizarRental'
+//estilos
+import Button from 'react-bootstrap/Button';
+import Collapse from 'react-bootstrap/Collapse';
 
 function RentalDetails(props) {
     const paramRental = useParams()
@@ -18,42 +21,56 @@ function RentalDetails(props) {
     const foundRental = filterRental[0]
 
     console.log(foundRental)
-    
+
     const [isUpdateFormShowing, setIsUpdateFormShowing] = useState(false)
 
     const handleToggleUpdateForm = () => {
         setIsUpdateFormShowing(!isUpdateFormShowing)
     }
 
-  return (
-    <div className='currentRental'>
-        <h1>Bienvendo a {foundRental.name}</h1>
-        <div className='imagen-apartamento'>
-            <img src={foundRental.picture_url.url} alt={foundRental.name} width={"500px"}/>
-            <h3>Localización: {foundRental.neighbourhood !== null ? `${foundRental.neighbourhood},` : " " } {foundRental.city}, {foundRental.country}</h3>
+    
+    const [open, setOpen] = useState(false)
+
+
+    return (
+        <div className='currentRental'>
+            <h1>Bienvendo a {foundRental.name}</h1>
+            <div className='imagen-apartamento'>
+                <img src={foundRental.picture_url.url} alt={foundRental.name} width={"500px"} />
+                <h3>Localización: {foundRental.neighbourhood !== null ? `${foundRental.neighbourhood},` : " "} {foundRental.city}, {foundRental.country}</h3>
+            </div>
+            <div className='datos'>
+                <h2>Tipo de alojamiento: {foundRental.property_type}</h2>
+                <h3>{foundRental.room_type}</h3>
+                <h3>Habitaciones: {foundRental.bedrooms}</h3>
+                <h3>Camas: {foundRental.beds}</h3>
+                <h3>Baños: {foundRental.bathrooms}</h3>
+                <h3>Capacidad: {foundRental.accommodates} personas</h3>
+                <p id='price'>{foundRental.price}<span id='symbol'>€</span> </p>
+                <Button variant="outline-primary" onClick={handleToggleUpdateForm}>Editar Información</Button >
+                {isUpdateFormShowing === true ?
+                    <ActualizarRental
+                        eachObj={props.currentRental}
+                        setCurrentRental={props.setCurrentRental}
+                    /> : null
+                }
+            </div>
+            <div className='descripciones'>
+                <Button variant="outline-primary" onClick={() => setOpen(!open)}
+                aria-controls="example-collapse-text"
+                aria-expanded={open}
+                >
+                    Ver Mas
+                </Button>
+                <Collapse in={open}>
+                <div id="example-collapse-text">
+                    {foundRental.description}
+                    {foundRental.space}
+                </div>
+                </Collapse>    
+            </div>
         </div>
-        <div className='datos'>
-            <h2>Tipo de alojamiento: {foundRental.property_type}</h2>
-            <h3>{foundRental.room_type}</h3>
-            <h3>Habitaciones: {foundRental.bedrooms}</h3>
-            <h3>Camas: {foundRental.beds}</h3>
-            <h3>Baños: {foundRental.bathrooms}</h3>
-            <h3>Capacidad: {foundRental.accommodates} personas</h3>
-            <p id='price'>{foundRental.price}<span id='symbol'>€</span> </p>
-            <button onClick={handleToggleUpdateForm}>Editar Información</button>
-            {isUpdateFormShowing === true ? 
-            <ActualizarRental 
-            eachObj={props.currentRental} 
-            setCurrentRental={props.setCurrentRental}
-            /> : null
-            }
-        </div>
-        <div className='descripciones'>
-            <p>{foundRental.description}</p>
-            <p>{foundRental.space}</p>
-        </div>
-    </div>
-  )
+    )
 }
 
 export default RentalDetails

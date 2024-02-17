@@ -3,6 +3,8 @@ import moneda1 from "../assets/img/moneda1.png";
 import moneda2 from "../assets/img/moneda2.png";
 import moneda3 from "../assets/img/moneda3.png";
 import ListItem from "./ListItem";
+//estilos
+import Button from 'react-bootstrap/Button';
 
 function List(props) {
   return (
@@ -32,7 +34,7 @@ function List(props) {
               setCurrentRental={props.setCurrentRental}
               />
             </Link>
-            <button onClick={() => props.handleRemoveRental(index)}>❌</button>
+            <Button variant="outline-info" onClick={() => props.handleRemoveRental(index)}>❌</Button>
             
             <hr />
           </div>
