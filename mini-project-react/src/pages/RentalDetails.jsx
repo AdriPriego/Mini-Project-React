@@ -31,6 +31,8 @@ function RentalDetails(props) {
     
     const [open, setOpen] = useState(false)
 
+    console.log(props.currentRental)  
+    
 
     return (
         <div className='currentRental'>
@@ -50,7 +52,7 @@ function RentalDetails(props) {
                 <Button variant="outline-primary" onClick={handleToggleUpdateForm}>Editar Información</Button >
                 {isUpdateFormShowing === true ?
                     <ActualizarRental
-                        eachObj={props.currentRental}
+                        foundRental={foundRental}
                         setCurrentRental={props.setCurrentRental}
                     /> : null
                 }

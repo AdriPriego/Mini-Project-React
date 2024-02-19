@@ -2,22 +2,24 @@ import { useState } from "react";
 //estilos
 import Button from 'react-bootstrap/Button';
 
+import placeholder from "../assets/img/placeholder.jpeg"
+
 function ActualizarRental(props) {
 
-  const [inputName, setInputName] = useState(props.eachObj.name);
-  const [inputBarrio, setInputBarrio] = useState(props.eachObj.neighbourhood);
-  const [inputCiudad, setInputCiudad] = useState(props.eachObj.city);
-  const [inputPais, setInputPais] = useState(props.eachObj.country);
-  const [inputTipo, setInputTipo] = useState(props.eachObj.property_type);
-  const [inputTipohab, setInputtipohab] = useState(props.eachObj.room_type);
-  const [inputHabitaciones, setInputHabitaciones] = useState(props.eachObj.bedrooms);
-  const [inputCamas, setInputCamas] = useState(props.eachObj.beds);
-  const [inputBaños, setInputBaños] = useState(props.eachObj.bathrooms);
-  const [inputCapacidad, setInputCapacidad] = useState(props.eachObj.accommodates);
-  const [inputPrecio, setInputPrecio] = useState(props.eachObj.price);
-  const [inputDescripcion, setInputDescripcion] = useState(props.eachObj.description);
-  const [inputSituacion, setInputSituacion] = useState(props.eachObj.space);
-
+  const [inputName, setInputName] = useState(props.foundRental.name);
+  const [inputBarrio, setInputBarrio] = useState(props.foundRental.neighbourhood);
+  const [inputCiudad, setInputCiudad] = useState(props.foundRental.city);
+  const [inputPais, setInputPais] = useState(props.foundRental.country);
+  const [inputTipo, setInputTipo] = useState(props.foundRental.property_type);
+  const [inputTipohab, setInputtipohab] = useState(props.foundRental.room_type);
+  const [inputHabitaciones, setInputHabitaciones] = useState(props.foundRental.bedrooms);
+  const [inputCamas, setInputCamas] = useState(props.foundRental.beds);
+  const [inputBaños, setInputBaños] = useState(props.foundRental.bathrooms);
+  const [inputCapacidad, setInputCapacidad] = useState(props.foundRental.accommodates);
+  const [inputPrecio, setInputPrecio] = useState(props.foundRental.price);
+  const [inputDescripcion, setInputDescripcion] = useState(props.foundRental.description);
+  const [inputSituacion, setInputSituacion] = useState(props.foundRental.space);
+  const [inputImg, setInputImg] = useState(props.foundRental.picture_url.url)
 
   const handleInputName = (event) => {
     setInputName(event.target.value)
@@ -58,11 +60,15 @@ function ActualizarRental(props) {
   const handleInputSituacion = (event) => {
     setInputSituacion(event.target.value)
   }
+  const handleInputImg = (event) => {
+    setInputImg(event.target.value)
+  }
 
-  const {name, neighbourhood, city, country, property_type, bedrooms, beds, bathrooms, accommodates, price, description, space, id} = props.eachObj 
+  // const {name, neighbourhood, city, country, property_type, bedrooms, beds, bathrooms, accommodates, price, description, space, id} = props.currentRental 
 
   const handleSubmit = (event) => {
     event.preventDefault()
+    console.log("probando")
 
     const updateProductValues = {
       name: inputName,
@@ -77,28 +83,43 @@ function ActualizarRental(props) {
       accommodates: inputCapacidad,
       price: inputPrecio,
       description: inputDescripcion,
-      space: inputSituacion
+      space: inputSituacion,
+      picture_url: inputImg
     }
     props.setCurrentRental((estadoActual) => {
-      const clone = JSON.parse(JSON.stringify(estadoActual))
-      clone[props.eachObj.id].name = inputName
-      clone[props.eachObj.id].neighbourhood = inputBarrio
-      clone[props.eachObj.id].city = inputCiudad
-      clone[props.eachObj.id].country = inputPais
-      clone[props.eachObj.id].property_type = inputTipo
-      clone[props.eachObj.id].room_type = inputTipohab
-      clone[props.eachObj.id].bedrooms = inputHabitaciones
-      clone[props.eachObj.id].beds = inputCamas
-      clone[props.eachObj.id].bathrooms = inputBaños
-      clone[props.eachObj.id].accommodates = inputCapacidad
-      clone[props.eachObj.id].price = inputPrecio
-      clone[props.eachObj.id].description = inputDescripcion
-      clone[props.eachObj.id].space = inputSituacion
+       const clone = JSON.parse(JSON.stringify(estadoActual))
+
+       const rentalChange = clone.find((eachRental) =>{
+        if (eachRental.id === props.foundRental.id) {
+          return eachRental
+        } else {
+          return undefined
+        }
+       })
+
+
+       console.log(rentalChange)
+      rentalChange.name = inputName
+      rentalChange.neighbourhood = inputBarrio
+      rentalChange.city = inputCiudad
+      rentalChange.country = inputPais
+      rentalChange.property_type = inputTipo
+      rentalChange.room_type = inputTipohab
+      rentalChange.bedrooms = inputHabitaciones
+      rentalChange.beds = inputCamas
+      rentalChange.bathrooms = inputBaños
+      rentalChange.accommodates = inputCapacidad
+      rentalChange.price = inputPrecio
+      rentalChange.description = inputDescripcion
+      rentalChange.space = inputSituacion
+      rentalChange.picture_url.url = inputImg
 
       return clone
-    })
+     })
   }
-  console.log(props.eachObj.id)
+  console.log(props.foundRental)
+
+
 
   return (
     <div>
@@ -106,7 +127,7 @@ function ActualizarRental(props) {
         <div>
           <label htmlFor="name">Name: </label>
           <input type="text" name="name"
-            onChange={props.handleNameChange}
+            onChange={handleInputName}
             value={inputName}
           />
         </div>
@@ -114,88 +135,99 @@ function ActualizarRental(props) {
           <div>Localización</div>
           <label htmlFor="name">Barrio: </label>
           <input type="text" name="name"
-            onChange={props.handleBarrioChange}
+            onChange={handleInputBarrio}
             value={inputBarrio}
           />
           <label htmlFor="name">Ciudad: </label>
           <input type="text" name="name"
-            onChange={props.handleCiudadChange}
+            onChange={handleInputCiudad}
             value={inputCiudad}
           />
           <label htmlFor="name">País: </label>
           <input type="text" name="name"
-            onChange={props.handlePaisChange}
+            onChange={handleInputPais}
             value={inputPais}
           />
         </div>
         <div>
           <label htmlFor="name">Tipo de alojamiento: </label>
           <input type="text" name="name"
-            onChange={props.handleTipoChange}
+            onChange={handleInputTipo}
             value={inputTipo}
           />
         </div>
         <div>
           <label htmlFor="name">Tipo de habitaciones: </label>
           <input type="text" name="name"
-            onChange={props.handleTipohabChange}
+            onChange={handleInputTpohab}
             value={inputTipohab}
           />
         </div>
         <div>
           <label htmlFor="number">Número de habitaciones: </label>
           <input type="number" name="name"
-            onChange={props.handleHabitacionesChange}
+            onChange={handleInputHabitaciones}
             value={inputHabitaciones}
           />
         </div>
         <div>
           <label htmlFor="number">Número de camas: </label>
           <input type="number" name="name"
-            onChange={props.handleCamasChange}
+            onChange={handleInputCamas}
             value={inputCamas}
           />
         </div>
         <div>
           <label htmlFor="number">Número de cuartos de baño: </label>
           <input type="number" name="name"
-            onChange={props.handleBañosChange}
+            onChange={handleInputBaños}
             value={inputBaños}
           />
         </div>
         <div>
           <label htmlFor="number">Capacidad: </label>
           <input type="number" name="name"
-            onChange={props.handleCapacidadChange}
+            onChange={handleInputCapacidad}
             value={inputCapacidad}
           />
         </div>
         <div>
           <label htmlFor="price">Precio: </label>
           <input type="number" name="name"
-            onChange={props.handlePrecioChange}
+            onChange={handleInputPrecio}
             value={inputPrecio}
           />
         </div>
         <div className="descripcion">
           <label htmlFor="name">Descripción del alojamiento: </label>
           <input type="text" name="name"
-            onChange={props.handleDescripcionChange}
+            onChange={handleInputDescripcion}
             value={inputDescripcion}
           />
         </div>
         <div className="descripcion">
           <label htmlFor="name">Situación geográfica: </label>
           <input type="text" name="name"
-            onChange={props.handleSituacionChange}
+            onChange={handleInputSituacion}
             value={inputSituacion}
           />
         </div>
+        <div className="imagen">
+          <label htmlFor="name">Imagen: </label>
+          <input type="url" name="name"
+            onChange={handleInputImg}
+            value={inputImg !== " " ? inputImg : placeholder}
+          />
+        </div>
 
-        <Button variant="outline-success">Confirmar</Button>
+        <Button variant="outline-success"
+        type="submit"
+        >Confirmar</Button>
       </form>
     </div>
   )
 }
 
 export default ActualizarRental;
+
+

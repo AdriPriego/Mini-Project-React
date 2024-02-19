@@ -17,7 +17,7 @@ let rentalDataArr = rentalData.results
 
 function App() {
 
-  console.log(rentalDataArr)
+  // console.log(rentalDataArr)
   
   const [currentRental, setCurrentRental] = useState(rentalDataArr);
 
@@ -38,6 +38,7 @@ function App() {
         />} />
         <Route path={`/rental/:rentalId`} element={ <RentalDetails 
         currentRental={currentRental}
+        setCurrentRental={setCurrentRental}
         />}/>
         <Route path={"/form"} element={ <FormAdd 
         currentRental={currentRental}

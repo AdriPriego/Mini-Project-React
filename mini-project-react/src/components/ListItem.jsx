@@ -15,7 +15,7 @@ function ListItem(props) {
                 {name} <img src={priceImg} width={"25px"} />{" "}
               </h3>
 
-              <img src={picture_url.url} width={"400px"} />
+              <img src={picture_url.url} width={"400px"} alt="imagen" />
               <h5>Tipo de alojamiento: {property_type}</h5>
               <h5>Country: {country}</h5>
               <h5>City: {city}</h5>

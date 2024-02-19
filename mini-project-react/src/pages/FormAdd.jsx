@@ -1,5 +1,12 @@
 import { useState } from "react";
 
+import Button from 'react-bootstrap/Button';
+
+import placeholder from "../assets/img/placeholder.jpeg"
+import moneda3 from "../assets/img/moneda3.png"
+
+
+
 function FormAdd(props) {
   const [inputName, setInputName] = useState("");
   const [inputBarrio, setInputBarrio] = useState("");
@@ -13,7 +20,8 @@ function FormAdd(props) {
   const [inputCapacidad, setInputCapacidad] = useState(1);
   const [inputPrecio, setInputPrecio] = useState(20);
   const [inputDescripcion, setInputDescripcion] = useState("");
-  const [inputSituacion, setInputSituacion] = useState("")
+  const [inputSituacion, setInputSituacion] = useState("");
+  const [inputImg, setInputImg] = useState(imagen)
 
     const handleNameChange = (event) => {
         setInputName(event.target.value)
@@ -54,6 +62,9 @@ function FormAdd(props) {
     const handleSituacionChange = (event) => {
         setInputSituacion(event.target.value)
     }
+    const handleImgChange = (event) => {
+      setInputImg(event.target.value)
+    }
     
 
 
@@ -74,7 +85,11 @@ function FormAdd(props) {
         accommodates: inputCapacidad,
         price: inputPrecio, 
         description: inputDescripcion,
-        space: inputSituacion
+        space: inputSituacion,
+        id: Math.floor(Math.random() * 7000000),
+        picture_url: {
+          url: inputImg
+        }
     }
 
     props.setCurrentRental((valorActualdelEstado) => {
@@ -84,7 +99,13 @@ function FormAdd(props) {
         clone.unshift(nuevoApartamento)
         return clone
     })
+      console.log(nuevoApartamento)
 
+    if (inputImg !== undefined) {
+      setInputImg(inputImg)
+    } else {
+      setInputImg(placeholder)
+    }
 
 
   };
@@ -182,8 +203,18 @@ function FormAdd(props) {
           value={inputSituacion}
           />
         </div>
+        <div className="imagen">
+          <label htmlFor="name">Imagen: </label>
+         
+          <input type="text" placeholder="Imagen del alojamiento" name="name"
+            onChange={handleImgChange}
+            value={inputImg}
+          />
+        </div>
 
-        <button>Añadir</button>
+        <Button type="submit"
+        variant="outline-danger"
+        >Añadir</Button>
       </form>
     </div>
   );
