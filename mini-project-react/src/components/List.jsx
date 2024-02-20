@@ -15,8 +15,15 @@ function List(props) {
 
   const [favItems, setFavItems] = useState([])
 
+  const [fav, setFav] = useState(false)
+
   const handleFav = (indiceAlFav) => {
       console.log("pulsando", indiceAlFav);
+      
+
+
+
+
 
       let cloneRentalDataArr = JSON.parse(JSON.stringify(props.currentRental));
 
@@ -54,9 +61,9 @@ function List(props) {
               />
             </Link>
             <Button variant="outline-info" onClick={() => props.handleRemoveRental(index)}>❌</Button>
-            <button onClick={() => handleFav(eachObj)}>
+            <Button variant="outline-warning" onClick={() => handleFav()}>
                 <img src={favItems.includes(eachObj) ? Fav2 : Fav1} alt="estrella vacia" width={"30px"}/>
-            </button>
+            </Button>
             <hr />
           </div>
         );
