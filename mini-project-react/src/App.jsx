@@ -45,7 +45,8 @@ function App() {
         currentRental={currentRental}
         setCurrentRental={setCurrentRental}
         /> } />
-        <Route path={"/favoritos"} element={ <Favoritos /> }/>
+        <Route path={"/favoritos"} element={ <Favoritos currentRental={currentRental} setCurrentRental={setCurrentRental} />  }
+        />
         <Route path={"/about"} element= {<About />} />
         <Route path={"*"} element={<NotFound />} />
       </Routes>

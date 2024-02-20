@@ -11,14 +11,21 @@ import { useState } from "react";
 
 function List(props) {
 
-  let imgFav;
+  const [favArr, setFavArr] = useState([]);
 
-  const [fav, setFav] = useState(false)
+  const [favItems, setFavItems] = useState([])
 
-  const handleFav = () => {
-     setFav(prevFav => prevFav === Fav1 ? Fav2 : Fav1)
-  }
+  const handleFav = (indiceAlFav) => {
+      console.log("pulsando", indiceAlFav);
 
+      let cloneRentalDataArr = JSON.parse(JSON.stringify(props.currentRental));
+
+      favArr.splice(indiceAlFav, 0, cloneRentalDataArr[indiceAlFav]);
+      
+      setFavArr(favArr)
+    }
+    console.log(favArr)
+  
   return (
     <div>
       {props.currentRental.map((eachObj, index) => {
@@ -47,8 +54,8 @@ function List(props) {
               />
             </Link>
             <Button variant="outline-info" onClick={() => props.handleRemoveRental(index)}>❌</Button>
-            <button onClick={handleFav}>
-                <img src={fav} alt="estrella vacia" width={"30px"}/>
+            <button onClick={() => handleFav(eachObj)}>
+                <img src={favItems.includes(eachObj) ? Fav2 : Fav1} alt="estrella vacia" width={"30px"}/>
             </button>
             <hr />
           </div>
