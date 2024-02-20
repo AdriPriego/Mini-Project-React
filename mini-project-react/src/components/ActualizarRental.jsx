@@ -1,8 +1,9 @@
 import { useState } from "react";
 //estilos
 import Button from 'react-bootstrap/Button';
+import placeHolder from "../assets/img/placeholder.jpeg"
 
-import placeholder from "../assets/img/placeholder.jpeg"
+
 
 function ActualizarRental(props) {
 
@@ -70,22 +71,11 @@ function ActualizarRental(props) {
     event.preventDefault()
     console.log("probando")
 
-    const updateProductValues = {
-      name: inputName,
-      neighbourhood: inputBarrio,
-      city: inputCiudad,
-      country: inputPais,
-      property_type: inputTipo,
-      room_type: inputTipohab,
-      bedrooms: inputHabitaciones,
-      beds: inputCamas,
-      bathrooms: inputBaños,
-      accommodates: inputCapacidad,
-      price: inputPrecio,
-      description: inputDescripcion,
-      space: inputSituacion,
-      picture_url: inputImg
-    }
+
+
+   
+
+
     props.setCurrentRental((estadoActual) => {
        const clone = JSON.parse(JSON.stringify(estadoActual))
 
@@ -96,7 +86,6 @@ function ActualizarRental(props) {
           return undefined
         }
        })
-
 
        console.log(rentalChange)
       rentalChange.name = inputName
@@ -114,8 +103,20 @@ function ActualizarRental(props) {
       rentalChange.space = inputSituacion
       rentalChange.picture_url.url = inputImg
 
+      if (rentalChange.picture_url.url === "") {
+        rentalChange.picture_url.url = placeHolder
+      } 
+
       return clone
      })
+
+
+
+
+     props.setIsUpdateFormShowing(false)
+
+    //{inputImg !== "" ? inputImg :  placeholder}
+
   }
   console.log(props.foundRental)
 
@@ -214,13 +215,15 @@ function ActualizarRental(props) {
         </div>
         <div className="imagen">
           <label htmlFor="name">Imagen: </label>
-          <input type="url" name="name"
+          <input type="text" name="name"
             onChange={handleInputImg}
-            value={inputImg !== " " ? inputImg : placeholder}
+            value={inputImg}
           />
         </div>
 
-        <Button variant="outline-success"
+        <Button 
+
+        variant="outline-success"
         type="submit"
         >Confirmar</Button>
       </form>

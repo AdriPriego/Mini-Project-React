@@ -11,6 +11,7 @@ import { useState } from 'react'
 import rentalData from "./data/rentals.json";
 import FormAdd from './pages/FormAdd'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Favoritos from './pages/Favoritos'
 // importa el JSON y usarlo para ver la info SOLO se hace aqui una vez
 
 let rentalDataArr = rentalData.results
@@ -44,7 +45,7 @@ function App() {
         currentRental={currentRental}
         setCurrentRental={setCurrentRental}
         /> } />
-        
+        <Route path={"/favoritos"} element={ <Favoritos /> }/>
         <Route path={"/about"} element= {<About />} />
         <Route path={"*"} element={<NotFound />} />
       </Routes>

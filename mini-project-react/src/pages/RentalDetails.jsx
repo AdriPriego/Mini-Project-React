@@ -49,16 +49,18 @@ function RentalDetails(props) {
                 <h3>Baños: {foundRental.bathrooms}</h3>
                 <h3>Capacidad: {foundRental.accommodates} personas</h3>
                 <p id='price'>{foundRental.price}<span id='symbol'>€</span> </p>
-                <Button variant="outline-primary" onClick={handleToggleUpdateForm}>Editar Información</Button >
+                <Button  variant="outline-primary" onClick={handleToggleUpdateForm}>Editar Información</Button >
                 {isUpdateFormShowing === true ?
                     <ActualizarRental
                         foundRental={foundRental}
                         setCurrentRental={props.setCurrentRental}
+                        setIsUpdateFormShowing={setIsUpdateFormShowing}
                     /> : null
                 }
             </div>
             <div className='descripciones'>
-                <Button variant="outline-primary" onClick={() => setOpen(!open)}
+                <Button 
+                variant="outline-primary" onClick={() => setOpen(!open)}
                 aria-controls="example-collapse-text"
                 aria-expanded={open}
                 >
