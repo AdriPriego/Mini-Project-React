@@ -3,7 +3,7 @@ import { useState } from "react";
 import Button from 'react-bootstrap/Button';
 
 import placeholder from "../assets/img/placeholder.jpeg"
-import moneda3 from "../assets/img/moneda3.png"
+
 
 
 
@@ -21,7 +21,7 @@ function FormAdd(props) {
   const [inputPrecio, setInputPrecio] = useState(20);
   const [inputDescripcion, setInputDescripcion] = useState("");
   const [inputSituacion, setInputSituacion] = useState("");
-  const [inputImg, setInputImg] = useState(imagen)
+  const [inputImg, setInputImg] = useState("")
 
     const handleNameChange = (event) => {
         setInputName(event.target.value)
@@ -206,7 +206,7 @@ function FormAdd(props) {
         <div className="imagen">
           <label htmlFor="name">Imagen: </label>
          
-          <input type="text" placeholder="Imagen del alojamiento" name="name"
+          <input type="url" placeholder="Imagen del alojamiento" name="name"
             onChange={handleImgChange}
             value={inputImg}
           />
